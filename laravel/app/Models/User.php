@@ -45,4 +45,22 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // リレーション: 1人のユーザーは複数のアイテムを持てる、1つのアイテムは1人のユーザーをもつ（1対多）
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    // リレーション: 1人のユーザーは複数のGroupに所属、1つのグループは複数のユーザーをもつ（多対多）
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'user_group');
+    }
+
+    // リレーション: 1人のユーザーは複数のお気に入りを持てる、1つお気に入りは、1人のユーザーを持つ（1対多）
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }
