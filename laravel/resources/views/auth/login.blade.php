@@ -43,7 +43,7 @@
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
+            <x-primary-button class="ms-3" style="background-color: #0098ad; transition: background-color 0.3s; hover: background-color: #007a8c;" onmouseover="this.style.backgroundColor='#007a8c'" onmouseout="this.style.backgroundColor='#0098ad'">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
