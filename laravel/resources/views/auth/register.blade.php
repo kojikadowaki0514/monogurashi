@@ -39,12 +39,23 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
+        <h1 class="text-sm text-gray-600 mt-4">メールの通知頻度</h1>
+
+        <div class="flex items-center space-x-2 mt-2">
+            <input type="checkbox" id="real-time-notification" class="form-checkbox text-blue-500" style="width: 12px; height: 12px;">
+            <label for="real-time-notification" class="text-xs text-gray-600">リアルタイムで受け取る</label>
+        </div>
+        <div class="flex items-center space-x-2 mt-2">
+            <input type="checkbox" id="real-time-notification" class="form-checkbox text-blue-500" style="width: 12px; height: 12px;">
+            <label for="real-time-notification" class="text-xs text-gray-600">1週間に1回受け取る</label>
+        </div>
+
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 
-            <x-primary-button class="ms-4">
+            <x-primary-button class="ms-4" style="background-color: #0098ad">
                 {{ __('Register') }}
             </x-primary-button>
         </div>
