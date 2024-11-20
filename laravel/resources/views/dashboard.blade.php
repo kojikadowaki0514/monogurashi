@@ -12,8 +12,8 @@
             @else
                 <!-- タグ選択 -->
                 <div class="flex items-center mb-4">
-                    <select id="tags" class="border-gray-300 rounded-md px-4 py-2 w-64">
-                        <option value="">タグを選択してください</option>
+                    <select id="tags" class="border-gray-300 rounded-md px-4 py-2 w-64 text-sm text-gray-400">
+                        <option value="">検索タグを選択してください</option>
                         <option value="tag1">タグ1</option>
                         <option value="tag2">タグ2</option>
                     </select>
@@ -21,7 +21,7 @@
 
                 <!-- 検索ボックスと検索ボタン -->
                 <div class="flex items-center mb-4">
-                    <input type="text" id="search-box" placeholder="検索キーワードを入力してください" class="border-gray-300 rounded-md w-64 px-4 py-2">
+                    <input type="text" id="search-box" placeholder="検索キーワードを入力してください" class="border-gray-300 rounded-md w-64 px-4 py-2 text-sm">
                     <button class="ml-4 bg-[#0098ad] text-white px-4 py-2 rounded-md hover:bg-[#007a8b]">検索</button>
                 </div>
                 
@@ -34,7 +34,7 @@
                             @if ($category->category_image)
                                 <img src="{{ asset($category->category_image) }}" alt="{{ $category->category_name }}" class="w-24 h-24 object-cover rounded-md">
                             @else
-                                <img src="{{ asset('images/no_image.jpg') }}" alt="No Picture" class="w-24 h-24 object-cover rounded-md">
+                                <img src="{{ asset('images/categories/no_image.jpg') }}" alt="No Picture" class="w-24 h-24 object-cover rounded-md">
                             @endif
                             <!-- 名前 -->
                             <p class="mt-4 text-center text-lg font-semibold">{{ $category->category_name }}</p>
