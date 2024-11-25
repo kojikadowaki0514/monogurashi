@@ -14,7 +14,7 @@
             });
         </script>
     @endif
-    <div class="max-w-5xl mx-auto px-6 py-12">
+    <div class="max-w-5xl mx-auto px-6 py-12" style="height: calc(100vh - 128px);">
         <!-- 見出し -->
         <h1 class="text-2xl font-bold text-center text-[#0098ad] mb-6">カテゴリーとタグ登録</h1>
 
@@ -77,7 +77,7 @@
             <div class="flex flex-col items-center space-y-8">
                 <!-- カテゴリー画像 -->
                 <div class="flex flex-col items-center space-y-8">
-                    <div class="flex flex-col items-center justify-center bg-[#ece0cf] p-10 rounded-md border-dashed border-2 border-gray-300 w-full h-64">
+                    <div class="flex flex-col items-center justify-center bg-[#ece0cf] p-10 rounded-md border-dashed border-2 border-gray-300 w-80 h-64">
                         <p class="text-gray-600 text-center mb-4">【カテゴリー画像】</p>
                         <!-- プレビュー用の画像 -->
                         <img id="category-image-preview" 
@@ -87,8 +87,8 @@
                             <input type="hidden" id="category-image-url" name="category_image" 
                                  value="{{ session('category_image', asset('images/categories/no_image.jpg')) }}">
                         <!-- ファイル選択ボタン -->
-                        <label for="category-image-upload" class="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
-                            画像を選択
+                        <label for="category-image-upload" class="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 cursor-pointer">
+                            ファイル選択
                         </label>
                         <input id="category-image-upload" name="category_image" type="file" accept="image/*" class="hidden" onchange="previewCategoryImage(event)">
 

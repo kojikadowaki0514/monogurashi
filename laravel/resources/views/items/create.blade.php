@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto pt-3 pb-2">
+    <div class="max-w-7xl mx-auto pt-3 pb-2" style="height: calc(100vh - 132px);">
         <!-- 見出し -->
         <h1 class="text-2xl font-extrabold mb-6 text-center text-[#0098ad] tracking-wide">持ち物登録</h1>
 
@@ -12,7 +12,7 @@
             <input type="hidden" name="category_id" value="{{ request('category_id') }}">
 
             <!-- 左カラム -->
-            <div class="relative flex flex-col space-y-4 px-6 rounded-md">
+            <div class="relative flex flex-col space-y-4 rounded-md" style="padding-right: 120px;">
                 
                 <!-- 縦線 -->
                 <div class="absolute inset-y-0 right-0 w-px bg-[#0098ad]"></div>
@@ -96,9 +96,9 @@
             </div>
 
             <!-- 右カラム -->
-            <div class="flex flex-col items-center space-y-8">
+            <div class="flex flex-col items-center space-y-6">
                 <!-- ファイル選択 -->
-                <div class="flex flex-col items-center justify-center bg-[#ece0cf] p-10 rounded-md border-dashed border-2 border-gray-300 w-full h-48 mt-10">
+                <div class="flex flex-col items-center justify-center bg-[#ece0cf] p-6 rounded-md border-dashed border-2 border-gray-300 w-3/4 max-w-md h-auto mt-8">
                     <p class="text-gray-600 text-center mb-4">【持ち物の画像ファイル】</p>
                     <!-- プレビュー用の画像 -->
                     <img id="image-preview" 
@@ -106,12 +106,12 @@
                         alt="プレビュー画像" 
                         class="w-32 h-32 object-cover rounded-md mb-4">
                     <!-- ファイル選択ボタン -->
-                    <label for="file-upload" class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 cursor-pointer">
+                    <label for="file-upload" class="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 cursor-pointer">
                         ファイル選択
-                        <input id="file-upload" type="file" name="file" accept="image/*" class="hidden">
                     </label>
+                    <input id="file-upload" type="file" name="file" accept="image/*" class="hidden">
                 </div>
-                
+
                 <!-- 登録ボタン -->
                 <div>
                     <button type="submit" class="bg-[#0098ad] text-white px-6 py-2 rounded-md hover:bg-[#007a8b] text-center">
@@ -119,6 +119,7 @@
                     </button>
                 </div>
             </div>
+
         </form>
     </div>
 </x-app-layout>
