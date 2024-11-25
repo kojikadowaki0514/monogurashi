@@ -1,7 +1,11 @@
 <header class="w-full text-white py-1" style="background-color: #0098ad;">
     <div class="max-w-8xl mx-auto flex justify-between items-center" style="padding: 0 20px;">
         <!-- 左側: ロゴ -->
-        <h1 class="text-lg font-bold text-left" style="font-size: 25px;">モノ暮らし</h1>
+        <a href="{{ route('dashboard') }}" 
+            class="text-lg font-bold text-left hover:text-orange-300 transition duration-300" 
+            style="font-size: 25px; text-decoration: none;">
+            モノ暮らし
+        </a>
         
         <!-- 右側: ユーザー情報とナビゲーション -->
         <div class="flex items-center relative right-10">
