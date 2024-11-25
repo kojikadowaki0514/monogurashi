@@ -23,9 +23,9 @@ class Item extends Model
         return $this->belongsTo(Category::class);
     }
 
-    // リレーション: アイテムは複数のTagを持つ
+    // リレーション: アイテムは複数のタグを持つ（多対多）
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'item_tag');
+        return $this->belongsToMany(Tag::class, 'item_tag', 'item_id', 'tag_id');
     }
 }

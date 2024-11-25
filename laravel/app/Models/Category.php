@@ -11,9 +11,15 @@ class Category extends Model
 
     protected $fillable = ['category_image', 'category_name'];
     
-    // リレーション: 1つのカテゴリーは複数のアイテムを持つ、1つのアイテムは1つのカテゴリーを持つ（1対多）
+    // カテゴリーは複数のアイテムを持つ
     public function items()
     {
         return $this->hasMany(Item::class);
+    }
+
+    // カテゴリーは複数のタグを持つ
+    public function tags()
+    {
+        return $this->hasMany(Tag::class, 'category_id');
     }
 }

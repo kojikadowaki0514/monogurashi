@@ -64,4 +64,16 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Notification::class);
     }
+
+    public function categories()
+    {
+        return $this->hasManyThrough(
+            Category::class,  // 最終的に参照するモデル
+            Item::class,      // 中間テーブルとなるモデル
+            'user_id',        // itemsテーブルでusersを参照する外部キー
+            'id',             // categoriesテーブルでitemsを参照する外部キー
+            'id',             // usersテーブルのローカルキー
+            'category_id'     // itemsテーブルのローカルキー
+        );
+    }
 }

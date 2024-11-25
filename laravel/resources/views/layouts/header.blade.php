@@ -50,6 +50,7 @@
 
 </header>
 
+@auth
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const userMenuButton = document.getElementById('user-menu-button');
@@ -68,3 +69,4 @@
         });
     });
 </script>
+@endauth
