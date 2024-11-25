@@ -81,7 +81,13 @@ class CategoryTagController extends Controller
         $item = new Item();
         $item->user_id = Auth::id();
         $item->item_name = session('product_name', '');
-        $item->item_image = session('item_image', '');
+        
+        if (session('item_image')) {
+            $item->item_image = session('item_image'); // セッションの画像を登録
+        } else {
+            $item->item_image = 'images/items/no_image.jpg'; // デフォルト画像
+        }
+        
         $item->location = session('location', '');
         $item->description = session('notes', '');
         $item->category_id = $categoryId; // 取得した category_id を設定
