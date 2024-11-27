@@ -24,6 +24,7 @@
                 <span class="mt-2 text-white font-semibold">{{ Auth::user()->name }} さん</span>
 
                 <!-- ドロップダウンメニュー -->
+                @if (Route::currentRouteName() !== 'verification.notice')
                 <div id="user-menu" class="hidden absolute top-full mt-2 w-48 bg-[#ece0cf] rounded-md shadow-lg">
                     <ul class="py-2">
                         <li>
@@ -43,6 +44,7 @@
                         </li>
                     </ul>
                 </div>
+                @endif
             </div>
         @else
             @if(Route::currentRouteName() !== 'login')
@@ -60,17 +62,20 @@
         const userMenuButton = document.getElementById('user-menu-button');
         const userMenu = document.getElementById('user-menu');
 
-        // メニューの表示・非表示を切り替え
-        userMenuButton.addEventListener('click', () => {
-            userMenu.classList.toggle('hidden');
-        });
+        // 要素が存在する場合のみイベントリスナーを設定
+        if (userMenuButton && userMenu) {
+            // メニューの表示・非表示を切り替え
+            userMenuButton.addEventListener('click', () => {
+                userMenu.classList.toggle('hidden');
+            });
 
-        // メニュー外をクリックした場合、非表示にする
-        document.addEventListener('click', (event) => {
-            if (!userMenuButton.contains(event.target) && !userMenu.contains(event.target)) {
-                userMenu.classList.add('hidden');
-            }
-        });
+            // メニュー外をクリックした場合、非表示にする
+            document.addEventListener('click', (event) => {
+                if (!userMenuButton.contains(event.target) && !userMenu.contains(event.target)) {
+                    userMenu.classList.add('hidden');
+                }
+            });
+        }
     });
 </script>
 @endauth
