@@ -20,6 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// itmesテーブルの一覧表示
+Route::get('/categories/{category}', [CategoryController::class, 'showCategoryItems'])->name('categories.items');
+
 // 持ち物登録画面へ遷移
 Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
 

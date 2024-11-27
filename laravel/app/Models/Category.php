@@ -14,7 +14,7 @@ class Category extends Model
     // カテゴリーは複数のアイテムを持つ
     public function items()
     {
-        return $this->hasMany(Item::class);
+        return $this->hasMany(Item::class, 'category_id');
     }
 
     // カテゴリーは複数のタグを持つ

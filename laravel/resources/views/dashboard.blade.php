@@ -1,7 +1,7 @@
 <x-app-layout>
-    <div class="py-12">
+    <div class="min-h-screen py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if (!$categoriesExist && !$itemsExist)
+            @if (!$itemsExist)
                 <!-- データが存在しない場合のメッセージとボタン -->
                 <div class="bg-red-100 text-red-800 p-6 rounded-md text-center mb-6">
                     <p class="text-lg font-semibold mb-4">現在、カテゴリーおよび持ち物が登録されていません。</p>
@@ -28,18 +28,21 @@
                 <!-- CATEGORY表示 -->
                 <h2 class="text-3xl font-bold mb-8 text-center">CATEGORY</h2>
                 <div class="grid grid-cols-3 gap-8">
-                    @foreach ($categories as $category)
-                        <div class="bg-[#f4ede4] p-8 rounded-xl shadow-lg hover:shadow-2xl cursor-pointer flex flex-col items-center justify-center">
-                            <!-- 画像 -->
-                            @if ($category->category_image)
-                                <img src="{{ asset($category->category_image) }}" alt="{{ $category->category_name }}" class="w-24 h-24 object-cover rounded-md">
-                            @else
-                                <img src="{{ asset('images/categories/no_image.jpg') }}" alt="No Picture" class="w-24 h-24 object-cover rounded-md">
-                            @endif
-                            <!-- 名前 -->
+                    @forelse ($categories as $category)
+                        <a href="{{ route('categories.items', $category->id) }}" class="bg-[#f4ede4] p-8 rounded-xl shadow-lg hover:shadow-2xl cursor-pointer flex flex-col items-center justify-center">
+                            <!-- カテゴリー画像 -->
+                            <img src="{{ asset($category->category_image ?? 'images/categories/no_image.jpg') }}" 
+                                alt="{{ $category->category_name }}" 
+                                class="w-24 h-24 object-cover rounded-md">
+                            <!-- カテゴリー名 -->
                             <p class="mt-4 text-center text-lg font-semibold">{{ $category->category_name }}</p>
-                        </div>
-                    @endforeach
+                        </a>
+                    @empty
+                        <!-- ログインユーザーに関連するカテゴリーがない場合 -->
+                        <p class="text-center col-span-3 text-red-500 text-lg font-semibold">
+                            ログインユーザーに関連するカテゴリーがありません。
+                        </p>
+                    @endforelse
                 </div>
             @endif
         </div>

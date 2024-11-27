@@ -20,7 +20,7 @@ class Item extends Model
     // リレーション: アイテムは1つのカテゴリーに属する
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     // リレーション: アイテムは複数のタグを持つ（多対多）
