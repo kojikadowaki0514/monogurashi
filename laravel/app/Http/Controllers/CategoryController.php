@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Item;
+use App\Models\Tag;
 
 class CategoryController extends Controller
 {
@@ -27,9 +29,29 @@ class CategoryController extends Controller
 
         // ログインユーザーが登録したそのカテゴリーに属するアイテムを取得
         $items = Item::where('category_id', $categoryId)
-                     ->where('user_id', auth()->id()) // ログインユーザー限定
-                     ->paginate(5); // ページネーション
+             ->where('user_id', auth()->id()) // ログインユーザー限定
+             ->with('tags') // tagsリレーションをロード
+             ->paginate(5); // ページネーション
 
         return view('categories.items', compact('category', 'items'));
+    }
+
+    // タグの値で検索する
+    public function filterItems(Request $request, $categoryId)
+    {
+        $tagId = $request->input('tag_id'); // 選択されたタグID
+
+        $items = Item::where('category_id', $categoryId)
+            ->where('user_id', auth()->id())
+            ->when($tagId, function ($query) use ($tagId) {
+                $query->whereHas('tags', function ($query) use ($tagId) {
+                    $query->where('tags.id', $tagId);
+                });
+            })
+            ->paginate(5); // ページネーション
+
+        $category = Category::findOrFail($categoryId);
+
+        return view('categories.items', compact('items', 'category'));
     }
 }

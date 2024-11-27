@@ -70,11 +70,32 @@ class CategoryTagController extends Controller
             }
         }
 
-        // タグの登録
+        $tagId = null;
+
+        // リクエストでタグ名が入力されている場合に処理を実行
         if (!empty($request->tag_name)) {
-            $newTag = new Tag();
-            $newTag->tag_name = $request->tag_name;
-            $newTag->save();
+            // 入力されたタグ名が既存のタグとしてデータベースに存在するかを確認
+            $existingTag = Tag::where('tag_name', $request->tag_name)->first();
+
+            if ($existingTag) {
+                // 既存のタグのIDを取得して、変数に保存
+                $tagId = $existingTag->id;
+            } else {
+                // 新しいタグを作成
+                $newTag = new Tag();
+                // 入力されたタグ名を設定
+                $newTag->tag_name = $request->tag_name;
+                // 新しいタグをデータベースに保存
+                $newTag->save();
+
+                // 新しく作成されたタグのIDを取得して、変数に保存
+                $tagId = $newTag->id;
+            }
+        }
+
+        // item_tagテーブルにitem_idとtag_idを登録
+        if (!empty($tagIds)) {
+            $item->tags()->sync($tagIds);
         }
 
         // アイテムの登録
@@ -106,10 +127,10 @@ class CategoryTagController extends Controller
         $user = Auth::user(); // ログイン中のユーザー
 
         // ログインユーザーが所持しているカテゴリーを取得
-        $categories = $user->categories; // hasManyThroughを利用
+        $categories = $user->categories;
 
-        // タグを取得する場合（適宜リレーションを定義する必要あり）
-        $tags = Tag::all(); // 必要なら変更
+        // タグを取得する場合
+        $tags = Tag::all();
 
         return view('items.create', compact('categories', 'tags'));
     }

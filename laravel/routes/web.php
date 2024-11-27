@@ -23,6 +23,10 @@ Route::middleware('auth')->group(function () {
 // itmesテーブルの一覧表示
 Route::get('/categories/{category}', [CategoryController::class, 'showCategoryItems'])->name('categories.items');
 
+// タグの値で検索
+Route::get('/categories/{category}/items/filter', [CategoryController::class, 'filterItems'])->name('categories.items.filter');
+
+
 // 持ち物登録画面へ遷移
 Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
 

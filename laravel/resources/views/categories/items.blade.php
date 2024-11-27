@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto px-6 py-9">
+    <div class="max-w-7xl mx-auto px-6 py-9" style="height: calc(100vh - 132px)">
         <div class="mb-6 text-left">
             <a href="{{ route('dashboard') }}" class="bg-orange-400 text-white px-4 py-2 rounded-md hover:bg-orange-500">
                 前のページに戻る
@@ -9,14 +9,23 @@
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-2xl font-bold">{{ $category->category_name }} </h1>
             <div>
-                <select id="tags" class="border-gray-300 rounded-md px-4 py-2 text-sm text-gray-400">
-                    <option value="">タグを選択してください</option>
-                    <!-- サンプルタグ -->
-                    <option value="tag1">タグ1</option>
-                    <option value="tag2">タグ2</option>
-                </select>
-                <input type="text" id="search-box" placeholder="検索キーワードを入力してください" class="border-gray-300 rounded-md px-4 py-2 text-sm ml-4">
-                <button class="ml-4 bg-[#0098ad] text-white px-4 py-2 rounded-md hover:bg-[#007a8b]">検索</button>
+                <form method="GET" action="{{ route('categories.items.filter', ['category' => $category->id]) }}">
+                    <select id="tags" name="tag_id" class="border-gray-300 rounded-md px-4 py-2 text-sm text-gray-800 w-60">
+                        <option value="">タグを選択してください</option>
+                        @foreach ($items as $item)
+                            @foreach ($item->tags as $tag)
+                                <option value="{{ $tag->id }}" class="text-gray-800">{{ $tag->tag_name }}</option>
+                            @endforeach
+                        @endforeach
+                    </select>
+                    <input type="text" id="search-box" placeholder="品名を入力してください" class="border-gray-300 rounded-md px-4 py-2 text-sm ml-4 text-gray-800 w-60">
+                    <button type="submit" class="ml-4 bg-[#0098ad] text-white px-4 py-2 rounded-md hover:bg-[#007a8b]">検索</button>
+                    <a href="{{ route('categories.items', ['category' => $category->id]) }}" 
+                       class="ml-4 bg-orange-400 text-white px-4 py-2 rounded-md hover:bg-orange-500 h-10 inline-block">
+                        リセット
+                    </a>
+                </form>
+                
             </div>
         </div>
 
@@ -82,15 +91,15 @@
             </div>
 
             <!-- 右側（選択したアイテム詳細） -->
-            <div id="item-details" class="bg-[#ece0cf] p-6 rounded-md border border-gray-300">
-            <h2 id="item-name" class="text-xl font-bold mb-4">{{ $firstItem->item_name ?? 'N/A' }}</h2>
+            <div id="item-details" class="bg-[#ece0cf] p-3 rounded-md border border-gray-300">
+            <h2 id="item-name" class="text-xl font-bold mb-4">{{ $firstItem->item_name ?? '' }}</h2>
             <img id="item-image" 
                 src="{{ asset($firstItem->item_image ? 'storage/' . $firstItem->item_image : 'images/items/no_image.jpg') }}" 
                 alt="選択された持ち物" 
-                class="w-full h-48 object-cover rounded-md mb-4">
+                class="w-full h-40 object-cover rounded-md mb-4">
             <div class="flex mb-2">
                 <span class="w-24 font-semibold">登録日時:</span>
-                <span id="item-created-at">{{ $firstItem->created_at->format('Y/m/d H:i') ?? 'N/A' }}</span>
+                <span id="item-created-at">{{ $firstItem->created_at->format('Y/m/d H:i') ?? '' }}</span>
             </div>
             <div class="flex mb-2">
                 <span class="w-24 font-semibold">登録者:</span>
@@ -98,11 +107,11 @@
             </div>
             <div class="flex mb-2">
                 <span class="w-24 font-semibold">保管場所:</span>
-                <span id="item-location">{{ $firstItem->location ?? 'N/A' }}</span>
+                <span id="item-location">{{ $firstItem->location ?? '' }}</span>
             </div>
             <div class="flex">
                 <span class="w-24 font-semibold">備考:</span>
-                <span id="item-description">{{ $firstItem->description ?? 'N/A' }}</span>
+                <span id="item-description">{{ $firstItem->description ?? '' }}</span>
             </div>
         </div>
 

@@ -20,6 +20,6 @@ class Tag extends Model
     // リレーション: タグは複数のアイテムに関連付けられる
     public function items()
     {
-        return $this->belongsToMany(Item::class, 'item_tag', 'tag_id', 'item_id');
+        return $this->belongsToMany(Item::class, 'item_tag', 'item_id', 'tag_id');
     }
 }
