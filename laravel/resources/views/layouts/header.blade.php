@@ -14,7 +14,7 @@
             <div class="flex flex-col items-center relative">
                 <!-- ユーザーアイコン -->
                 <button id="user-menu-button" class="flex items-center focus:outline-none">
-                    <img 
+                    <img style="width: 2.5rem !important; height: 2.5rem !important; object-fit: cover; border-radius: 9999px;"
                         src="{{ Auth::user()->user_icon ? asset(Auth::user()->user_icon) : asset('images/users/user_icon.jpg') }}" 
                         alt="User Icon" 
                         class="w-10 h-10 object-cover rounded-full">
