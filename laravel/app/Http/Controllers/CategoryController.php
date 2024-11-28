@@ -40,6 +40,7 @@ class CategoryController extends Controller
     public function filterItems(Request $request, $categoryId)
     {
         $tagId = $request->input('tag_id'); // 選択されたタグID
+        $searchTerm = $request->input('search_term'); // 検索ボックスの入力値
 
         $items = Item::where('category_id', $categoryId)
             ->where('user_id', auth()->id())
@@ -48,9 +49,18 @@ class CategoryController extends Controller
                     $query->where('tags.id', $tagId);
                 });
             })
+            ->when($searchTerm, function ($query) use ($searchTerm) {
+                $query->where('item_name', 'LIKE', '%' . $searchTerm . '%');
+            })
             ->paginate(5); // ページネーション
 
         $category = Category::findOrFail($categoryId);
+
+        // タグのリストを再取得
+        $tags = Tag::whereHas('items', function ($query) use ($categoryId) {
+            $query->where('category_id', $categoryId)
+                ->where('user_id', auth()->id());
+        })->get();
 
         return view('categories.items', compact('items', 'category'));
     }

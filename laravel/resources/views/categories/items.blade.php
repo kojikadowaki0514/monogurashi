@@ -14,11 +14,23 @@
                         <option value="">タグを選択してください</option>
                         @foreach ($items as $item)
                             @foreach ($item->tags as $tag)
-                                <option value="{{ $tag->id }}" class="text-gray-800">{{ $tag->tag_name }}</option>
+                            <option 
+                                value="{{ $tag->id }}" 
+                                class="text-gray-800" 
+                                {{ request('tag_id') == $tag->id ? 'selected' : '' }}>
+                                {{ $tag->tag_name }}
+                            </option>
                             @endforeach
                         @endforeach
                     </select>
-                    <input type="text" id="search-box" placeholder="品名を入力してください" class="border-gray-300 rounded-md px-4 py-2 text-sm ml-4 text-gray-800 w-60">
+                    <input 
+                        type="text" 
+                        id="search-box" 
+                        name="search_term" 
+                        placeholder="品名を入力してください" 
+                        class="border-gray-300 rounded-md px-4 py-2 text-sm ml-4 text-gray-800 w-60" 
+                        value="{{ request('search_term') }}" 
+                    >
                     <button type="submit" class="ml-4 bg-[#0098ad] text-white px-4 py-2 rounded-md hover:bg-[#007a8b]">検索</button>
                     <a href="{{ route('categories.items', ['category' => $category->id]) }}" 
                        class="ml-4 bg-orange-400 text-white px-4 py-2 rounded-md hover:bg-orange-500 h-10 inline-block">
