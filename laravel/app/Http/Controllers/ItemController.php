@@ -84,4 +84,15 @@ class ItemController extends Controller
         // 検索結果をビューに渡す
         return view('all_item_search', compact('items', 'categories', 'keyword', 'categoryId'));
     }
+
+    public function destroy($id)
+    {
+        // 指定されたIDのアイテムを取得
+        $item = Item::findOrFail($id);
+
+        // アイテムを削除
+        $item->delete();
+
+        return redirect()->back();
+    }
 }
