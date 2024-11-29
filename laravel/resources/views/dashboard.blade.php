@@ -10,20 +10,35 @@
                     </a>
                 </div>
             @else
-                <!-- タグ選択 -->
-                <div class="flex items-center mb-4">
-                    <select id="tags" class="border-gray-300 rounded-md px-4 py-2 w-64 text-sm text-gray-400">
-                        <option value="">検索タグを選択してください</option>
-                        <option value="tag1">タグ1</option>
-                        <option value="tag2">タグ2</option>
-                    </select>
-                </div>
-
                 <!-- 検索ボックスと検索ボタン -->
                 <div class="flex items-center mb-4">
-                    <input type="text" id="search-box" placeholder="検索キーワードを入力してください" class="border-gray-300 rounded-md w-64 px-4 py-2 text-sm">
-                    <button class="ml-4 bg-[#0098ad] text-white px-4 py-2 rounded-md hover:bg-[#007a8b]">検索</button>
+                    <form method="GET" action="{{ route('items.search') }}" class="flex items-center">
+                        <input 
+                            type="text" 
+                            id="search-box" 
+                            name="search_term" 
+                            placeholder="品名を入力してください" 
+                            class="border-gray-300 rounded-md w-64 px-4 py-2 text-sm"
+                            value="{{ request('search_term') }}"> <!-- 検索後も入力を保持 -->
+                            <button 
+                                id="search-button" 
+                                type="submit" 
+                                class="ml-4 bg-[#0098ad] text-white px-4 py-2 rounded-md hover:bg-[#007a8b] relative">
+                                検索
+                                <div 
+                                    id="tooltip" 
+                                    class="absolute bg-red-100 text-red-800 text-xs rounded px-2 py-1 hidden"
+                                    style="top: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap;">
+                                    品名を入力せずに押すと、すべての持ち物が表示されます
+                                </div>
+                            </button>
+                    </form>
                 </div>
+                <!-- エラーメッセージの表示 -->
+                @if ($errors->has('search_term'))
+                    <p class="text-red-500 mt-2">{{ $errors->first('search_term') }}</p>
+                @endif
+
                 
                 <!-- CATEGORY表示 -->
                 <h2 class="text-3xl font-bold mb-8 text-center">CATEGORY</h2>
@@ -48,3 +63,20 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchButton = document.getElementById('search-button');
+        const tooltip = document.getElementById('tooltip');
+
+        // カーソルが乗ったときにツールチップを表示
+        searchButton.addEventListener('mouseenter', () => {
+            tooltip.classList.remove('hidden');
+        });
+
+        // カーソルが外れたときにツールチップを非表示
+        searchButton.addEventListener('mouseleave', () => {
+            tooltip.classList.add('hidden');
+        });
+    });
+</script>

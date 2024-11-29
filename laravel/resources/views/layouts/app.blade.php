@@ -13,6 +13,12 @@
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <style>
+        .small {
+            display: none;
+        }
+    </style>
+
 </head>
 <body class="font-sans antialiased flex flex-col min-h-screen">
     <div class="flex-grow">

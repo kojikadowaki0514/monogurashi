@@ -22,6 +22,7 @@ class CategoryController extends Controller
         return view('dashboard', compact('categories', 'itemsExist'));
     }
 
+    // カテゴリーに属している持ち物とタグの表示
     public function showCategoryItems($categoryId)
     {
         // 指定されたカテゴリーを取得
@@ -36,6 +37,7 @@ class CategoryController extends Controller
         return view('categories.items', compact('category', 'items'));
     }
 
+    // カテゴリーに属している持ち物とタグの検索
     // タグの値で検索する
     public function filterItems(Request $request, $categoryId)
     {

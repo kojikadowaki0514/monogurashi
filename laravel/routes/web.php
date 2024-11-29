@@ -26,6 +26,8 @@ Route::get('/categories/{category}', [CategoryController::class, 'showCategoryIt
 // タグの値で検索
 Route::get('/categories/{category}/items/filter', [CategoryController::class, 'filterItems'])->name('categories.items.filter');
 
+// 全ての持ち物の検索結果を表示
+Route::get('/items/search', [ItemController::class, 'search'])->name('items.search');
 
 // 持ち物登録画面へ遷移
 Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
