@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\Item;
 use App\Models\Category;
+use ChristianRiesen\LaravelFavorite\Models\Favorite;
+
 
 
 class ItemController extends Controller
@@ -85,6 +87,7 @@ class ItemController extends Controller
         return view('all_item_search', compact('items', 'categories', 'keyword', 'categoryId'));
     }
 
+    // 退会機能
     public function destroy($id)
     {
         // 指定されたIDのアイテムを取得
@@ -94,5 +97,22 @@ class ItemController extends Controller
         $item->delete();
 
         return redirect()->back();
+    }
+
+    // お気に入り機能
+    public function toggleFavorite(Request $request, Item $item)
+    {
+        if (auth()->user()->hasFavorited($item)) {
+            // すでにお気に入りの場合は解除
+            auth()->user()->favoriteItems()->detach($item->id);
+        } else {
+            // お気に入りに追加
+            auth()->user()->favoriteItems()->attach($item->id);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'favorited' => auth()->user()->hasFavorited($item),
+        ]);
     }
 }

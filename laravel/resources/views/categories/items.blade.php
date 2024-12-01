@@ -87,10 +87,13 @@
                                     </form>
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2 text-center">
-                                    <button class="text-red-500 hover:underline">
-                                        <i class="fas fa-heart"></i>
+                                    <button 
+                                        class="favorite-button focus:outline-none" 
+                                        data-url="{{ route('items.toggleFavorite', ['item' => $item->id]) }}">
+                                        <i class="fas fa-heart {{ auth()->user()->hasFavorited($item) ? 'text-red-500' : 'text-gray-400' }}"></i>
                                     </button>
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>
@@ -142,5 +145,38 @@
         document.getElementById('item-location').textContent = data.location;
         document.getElementById('item-description').textContent = data.description;
     }
+
+    // お気に入りボタンの表示
+    document.addEventListener("DOMContentLoaded", () => {
+    const favoriteButtons = document.querySelectorAll(".favorite-button");
+
+    favoriteButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            e.preventDefault(); // フォーム送信を防止
+            const url = button.getAttribute("data-url");
+            const icon = button.querySelector("i");
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+                    "Content-Type": "application/json",
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.favorited) {
+                        icon.classList.remove("text-gray-400");
+                        icon.classList.add("text-red-500");
+                    } else {
+                        icon.classList.remove("text-red-500");
+                        icon.classList.add("text-gray-400");
+                    }
+                })
+                .catch((error) => console.error("エラー:", error));
+            });
+        });
+    });
+
 </script>
 

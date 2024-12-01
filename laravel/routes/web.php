@@ -58,4 +58,8 @@ Route::get('/items/create', [CategoryTagController::class, 'showCreatePage'])->n
 // 退会用のルート
 Route::delete('/user/delete', [UserController::class, 'deleteAccount'])->name('user.delete');
 
+// お気に入り
+Route::post('/items/{item}/toggle-favorite', [ItemController::class, 'toggleFavorite'])->name('items.toggleFavorite');
+
+
 require __DIR__.'/auth.php';

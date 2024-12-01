@@ -28,4 +28,9 @@ class Item extends Model
     {
         return $this->belongsToMany(Tag::class, 'item_tag', 'item_id', 'tag_id');
     }
+
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites');
+    }
 }
