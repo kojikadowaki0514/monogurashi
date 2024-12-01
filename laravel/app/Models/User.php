@@ -76,4 +76,16 @@ class User extends Authenticatable implements MustVerifyEmail
             'category_id'     // itemsテーブルのローカルキー
         );
     }
+
+    public function tags()
+    {
+        return $this->hasManyThrough(Tag::class, Item::class, 'user_id', 'id', 'id', 'id');
+    }
+
+    // public function notifications()
+    // {
+    //     return $this->morphMany(Notification::class, 'notifiable');
+    // }
+
+    
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryTagController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,5 +55,7 @@ Route::post('/category-tag/store', [CategoryTagController::class, 'store'])->nam
 // カテゴリーとタグの登録後の画面表示
 Route::get('/items/create', [CategoryTagController::class, 'showCreatePage'])->name('items.create');
 
+// 退会用のルート
+Route::delete('/user/delete', [UserController::class, 'deleteAccount'])->name('user.delete');
 
 require __DIR__.'/auth.php';

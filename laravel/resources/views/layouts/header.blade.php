@@ -42,6 +42,15 @@
                                 <button type="submit" class="w-full text-left">ログアウト</button>
                             </form>
                         </li>
+                        <a href="#" 
+                            onclick="if(confirm('退会するとすべてのデータが削除されます。本当に退会しますか？')) { event.preventDefault(); document.getElementById('delete-account-form').submit(); }"
+                            class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+                            退会
+                        </a>
+                        <form id="delete-account-form" method="POST" action="{{ route('user.delete') }}" class="hidden">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                     </ul>
                 </div>
                 @endif
@@ -55,6 +64,13 @@
     </div>
 
 </header>
+
+<!-- 退会完了メッセージを表示 -->
+@if (session('success'))
+    <div class="bg-red-100 text-red-800 px-4 py-3 rounded relative text-center mt-4" style="background: pink; color: red;">
+        {{ session('success') }}
+    </div>
+@endif
 
 @auth
 <script>
