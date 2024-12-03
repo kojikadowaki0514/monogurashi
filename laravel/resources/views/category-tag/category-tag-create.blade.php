@@ -44,14 +44,12 @@
                 <select id="category" name="category_name" class="block w-full border-gray-300 rounded-md px-4 py-2 bg-[#ece0cf]" onchange="updateCategoryImage()">
                     <option value="" data-image="{{ asset('images/categories/no_image.jpg') }}">カテゴリーを選択</option>
                     @foreach($categories as $category)
-                        @if($category->id >= 1 && $category->id <= 6) <!-- 修正: idが1~6のみに限定 -->
-                            <option 
-                                value="{{ $category->category_name }}"
-                                data-image="{{ asset($category->category_image) }}"
-                                @if(session('category_name') == $category->category_name) selected @endif>
-                                {{ $category->category_name }}
-                            </option>
-                        @endif
+                        <option 
+                            value="{{ $category->category_name }}"
+                            data-image="{{ asset($category->category_image) }}"
+                            @if(session('category_name') == $category->category_name) selected @endif>
+                            {{ $category->category_name }}
+                        </option>
                     @endforeach
                 </select>
                 </div>

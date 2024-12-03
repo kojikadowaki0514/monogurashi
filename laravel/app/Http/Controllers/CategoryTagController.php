@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Item;
+use Log;
 
 class CategoryTagController extends Controller
 {
@@ -16,7 +17,7 @@ class CategoryTagController extends Controller
     {
         // categoriesテーブルの全データを取得
         $categories = Category::all();
-
+        Log::debug($categories);
         return view('category-tag.category-tag-create', compact('categories'));
     }
 

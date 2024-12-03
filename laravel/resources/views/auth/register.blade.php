@@ -41,13 +41,13 @@
 
         <h1 class="text-sm text-gray-600 mt-4">メールの通知頻度</h1>
 
-        <div class="flex items-center space-x-2 mt-2">
-            <input type="checkbox" id="real-time-notification" class="form-checkbox text-blue-500" style="width: 12px; height: 12px;">
+        <div id="real-time" class="flex items-center space-x-2 mt-2">
+            <input type="radio" id="real-time-notification" name="notification_frequency" value="real-time" class="form-radio text-blue-500" style="width: 12px; height: 12px;">
             <label for="real-time-notification" class="text-xs text-gray-600">リアルタイムで受け取る</label>
         </div>
-        <div class="flex items-center space-x-2 mt-2">
-            <input type="checkbox" id="real-time-notification" class="form-checkbox text-blue-500" style="width: 12px; height: 12px;">
-            <label for="real-time-notification" class="text-xs text-gray-600">1週間に1回受け取る</label>
+        <div id="weekly" class="flex items-center space-x-2 mt-2">
+            <input type="radio" id="weekly-notification" name="notification_frequency" value="weekly" class="form-radio text-blue-500" style="width: 12px; height: 12px;">
+            <label for="weekly-notification" class="text-xs text-gray-600">1週間に1回受け取る</label>
         </div>
 
         <div class="flex items-center justify-end mt-4">
