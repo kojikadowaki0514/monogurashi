@@ -14,7 +14,7 @@
             });
         </script>
     @endif
-    <div class="max-w-5xl mx-auto px-6 py-12" style="height: calc(100vh - 128px);">
+    <div class="max-w-5xl mx-auto px-6 py-12" style="height: calc(100vh - 140px);">
         <!-- 見出し -->
         <h1 class="text-2xl font-bold text-center text-[#0098ad] mb-6">カテゴリーとタグ登録</h1>
 

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto px-6 py-9" style="height: calc(100vh - 132px)">
+    <div class="max-w-7xl mx-auto px-6 py-9" style="height: calc(100vh - 140px)">
         <div class="mb-6 text-left">
             <a href="{{ route('dashboard') }}" class="bg-orange-400 text-white px-4 py-2 rounded-md hover:bg-orange-500">
                 前のページに戻る

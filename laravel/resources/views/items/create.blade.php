@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto pt-3 pb-2" style="height: calc(100vh - 132px);">
+    <div class="max-w-7xl mx-auto pt-3 pb-2" style="height: calc(100vh - 140px);">
         <!-- 見出し -->
         <h1 class="text-2xl font-extrabold mb-6 text-center text-[#0098ad] tracking-wide">持ち物登録</h1>
 

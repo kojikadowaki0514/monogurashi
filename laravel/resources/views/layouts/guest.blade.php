@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <style>
-            .min-h-screen { min-height: calc(100vh - 88px);}
+            .min-h-screen { min-height: calc(100vh - 96px);}
         </style>
     </head>
     <body class="h-full font-sans text-gray-900 antialiased">
