@@ -87,16 +87,27 @@ class ItemController extends Controller
         return view('all_item_search', compact('items', 'categories', 'keyword', 'categoryId'));
     }
 
-    // 退会機能
+    // 削除機能
     public function destroy($id)
     {
         // 指定されたIDのアイテムを取得
         $item = Item::findOrFail($id);
 
+        // アイテムのカテゴリーを取得
+        $categoryId = $item->category_id;
+
         // アイテムを削除
         $item->delete();
 
-        return redirect()->back();
+        // 該当カテゴリーにまだアイテムが残っているかを確認
+        $remainingItems = Item::where('category_id', $categoryId)->exists();
+
+        // アイテムが残っていれば元のページに戻り、なければダッシュボードにリダイレクト
+        if ($remainingItems) {
+            return redirect()->back();
+        } else {
+            return redirect()->route('dashboard');
+        }
     }
 
     // お気に入り機能

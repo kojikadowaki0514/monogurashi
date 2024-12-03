@@ -30,7 +30,7 @@ Route::get('/categories/{category}/items/filter', [CategoryController::class, 'f
 // 全ての持ち物の検索結果を表示
 Route::get('/items/search', [ItemController::class, 'search'])->name('items.search');
 
-// 削除用のルート
+// 削除のルート
 Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
 
 // 持ち物登録画面へ遷移

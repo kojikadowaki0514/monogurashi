@@ -107,27 +107,29 @@
 
             <!-- 右側（選択したアイテム詳細） -->
             <div id="item-details" class="bg-[#ece0cf] p-3 rounded-md border border-gray-300">
-            <h2 id="item-name" class="text-xl font-bold mb-4">{{ $firstItem->item_name ?? '' }}</h2>
-            <img id="item-image" 
-                src="{{ asset($firstItem->item_image ? 'storage/' . $firstItem->item_image : 'images/items/no_image.jpg') }}" 
-                alt="選択された持ち物" 
-                class="w-full h-40 object-cover rounded-md mb-4">
-            <div class="flex mb-2">
-                <span class="w-24 font-semibold">登録日時:</span>
-                <span id="item-created-at">{{ $firstItem->created_at->format('Y/m/d H:i') ?? '' }}</span>
-            </div>
-            <div class="flex mb-2">
-                <span class="w-24 font-semibold">登録者:</span>
-                <span>{{ Auth::user()->name }}</span>
-            </div>
-            <div class="flex mb-2">
-                <span class="w-24 font-semibold">保管場所:</span>
-                <span id="item-location">{{ $firstItem->location ?? '' }}</span>
-            </div>
-            <div class="flex">
-                <span class="w-24 font-semibold">備考:</span>
-                <span id="item-description">{{ $firstItem->description ?? '' }}</span>
-            </div>
+                @if ($firstItem)
+                    <h2 id="item-name" class="text-xl font-bold mb-4">{{ $firstItem->item_name ?? '' }}</h2>
+                    <img id="item-image" 
+                        src="{{ asset($firstItem->item_image ? 'storage/' . $firstItem->item_image : 'images/items/no_image.jpg') }}" 
+                        alt="選択された持ち物" 
+                        class="w-full h-40 object-cover rounded-md mb-4">
+                    <div class="flex mb-2">
+                        <span class="w-24 font-semibold">登録日時:</span>
+                        <span id="item-created-at">{{ $firstItem->created_at->format('Y/m/d H:i') ?? '' }}</span>
+                    </div>
+                    <div class="flex mb-2">
+                        <span class="w-24 font-semibold">登録者:</span>
+                        <span>{{ Auth::user()->name }}</span>
+                    </div>
+                    <div class="flex mb-2">
+                        <span class="w-24 font-semibold">保管場所:</span>
+                        <span id="item-location">{{ $firstItem->location ?? '' }}</span>
+                    </div>
+                    <div class="flex">
+                        <span class="w-24 font-semibold">備考:</span>
+                        <span id="item-description">{{ $firstItem->description ?? '' }}</span>
+                    </div>
+                @endif
         </div>
 
     </div>
