@@ -46,8 +46,11 @@
                     @forelse ($categories as $category)
                         <a href="{{ route('categories.items', $category->id) }}" class="bg-[#f4ede4] p-8 rounded-xl shadow-lg hover:shadow-2xl cursor-pointer flex flex-col items-center justify-center">
                             <!-- カテゴリー画像 -->
-                            <img src="{{ asset($category->category_image ?? 'images/categories/no_image.jpg') }}" 
-                                alt="{{ $category->category_name }}" 
+                            <img 
+                                src="{{ str_contains($category->category_image, 'images/categories/') 
+                                        ? asset($category->category_image) 
+                                        : asset('storage/' . $category->category_image) }}" 
+                                alt="Category Image" 
                                 class="w-24 h-24 object-cover rounded-md">
                             <!-- カテゴリー名 -->
                             <p class="mt-4 text-center text-lg font-semibold">{{ $category->category_name }}</p>
