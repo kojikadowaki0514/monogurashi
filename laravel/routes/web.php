@@ -6,6 +6,7 @@ use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryTagController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FavoriteController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -58,8 +59,10 @@ Route::get('/items/create', [CategoryTagController::class, 'showCreatePage'])->n
 // 退会用のルート
 Route::delete('/user/delete', [UserController::class, 'deleteAccount'])->name('user.delete');
 
-// お気に入り
+// お気に入り登録
 Route::post('/items/{item}/toggle-favorite', [ItemController::class, 'toggleFavorite'])->name('items.toggleFavorite');
 
+// お気に入り一覧
+Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
 
 require __DIR__.'/auth.php';

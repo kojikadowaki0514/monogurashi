@@ -31,7 +31,7 @@
                             <a href="{{ route('items.create') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900">持ち物登録</a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900">お気に入り</a>
+                            <a href="{{ route('favorites.index') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900">お気に入り</a>
                         </li>
                         <li>
                             <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900">設定</a>

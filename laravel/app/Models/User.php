@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -83,11 +84,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasManyThrough(Tag::class, Item::class, 'user_id', 'id', 'id', 'id');
     }
 
-    // public function notifications()
-    // {
-    //     return $this->morphMany(Notification::class, 'notifiable');
-    // }
-
     public function hasFavorited(Item $item)
     {
         return $this->favoriteItems()->where('item_id', $item->id)->exists();
@@ -97,4 +93,16 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Item::class, 'favorites');
     }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Item::class, 'favorites', 'user_id', 'item_id')
+                    ->withTimestamps();
+    }
+
+
+    // public function favorites()
+    // {
+    //     return $this->hasMany(Favorite::class);
+    // }
 }
